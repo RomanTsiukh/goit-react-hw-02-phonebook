@@ -1,3 +1,6 @@
+import { GlobalStyle } from 'components/GlobaleStyle';
+import Contacts from './Contacts/Contacts';
+
 export const App = () => {
   return (
     <div
@@ -6,11 +9,11 @@ export const App = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
+        fontSize: 20,
       }}
     >
-      React homework template
+      <GlobalStyle />
+      <Contacts />
     </div>
   );
 };
