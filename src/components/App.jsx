@@ -1,5 +1,5 @@
 import { GlobalStyle } from 'components/GlobaleStyle';
-import Contacts from './Contacts/Contacts';
+import Phonebook from './Phonebook/Phonebook';
 
 export const App = () => {
   return (
@@ -13,7 +13,7 @@ export const App = () => {
       }}
     >
       <GlobalStyle />
-      <Contacts />
+      <Phonebook />
     </div>
   );
 };
