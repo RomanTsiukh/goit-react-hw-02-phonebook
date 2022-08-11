@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-
 import styled from 'styled-components';
+// import Section from 'components/Section/Section';
 
 const Forma = styled.form`
-  /* display: flex; */
-  /* margin-top: 20px; */
   border: 2px solid;
   padding: 20px;
 `;

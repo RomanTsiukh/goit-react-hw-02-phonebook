@@ -10,11 +10,11 @@ const List = styled.ul`
 export default function Contacts({ contacts }) {
   return (
     <List>
-      {contacts.map(({ id, text, number }) => {
+      {contacts.map(({ id, name, number }) => {
         return (
           <li key={id}>
             <p>
-              {text}: {number}
+              {name}: {number}
             </p>
           </li>
         );
@@ -25,6 +25,6 @@ export default function Contacts({ contacts }) {
 
 Contacts.prototype = {
   id: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   number: PropTypes.number.isRequired,
 };

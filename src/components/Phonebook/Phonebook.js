@@ -3,32 +3,56 @@ import Form from 'components/Form/Form';
 import Contacts from 'components/Contacts/Contacts';
 import { nanoid } from 'nanoid';
 import styled from 'styled-components';
+import Section from 'components/Section/Section';
+import Filter from 'components/Filter/Filter';
 
 const Box = styled.div``;
 
 class Phonebook extends React.Component {
   state = {
-    contacts: [],
+    contacts: [
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    ],
+    filter: ' ',
   };
 
-  addContact = (text, number) => {
-    console.log(text, number);
+  addContact = (name, number) => {
+    console.log(name, number);
 
     const contact = {
       id: nanoid(),
-      text,
-      number: number,
+      name: name,
+      number,
     };
     this.setState(prevState => ({
       contacts: [contact, ...prevState.contacts],
     }));
   };
 
+  changeFilter = e => {
+    this.setState({ filter: e.currentTarget.value });
+  };
+
   render() {
     return (
       <Box>
-        <Form onSubmit={this.addContact} />
-        <Contacts contacts={this.state.contacts} />
+        <Section title="Phonebook">
+          <Form onSubmit={this.addContact} />
+        </Section>
+        <Section title="Contacts">
+          <Contacts contacts={this.state.contacts} />
+        </Section>
+
+        <Filter value={this.state.filter} onChange={this.changeFilter} />
+
+        {/* <input
+          type="text"
+          value={this.state.filter}
+          onChange={this.changeFilter}
+        /> */}
       </Box>
     );
   }
