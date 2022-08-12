@@ -37,22 +37,20 @@ class Phonebook extends React.Component {
   };
 
   render() {
+    const filteredPhoneBook = this.state.contacts.filter(contact =>
+      contact.name.toLowerCase().includes(this.state.filter.toLowerCase())
+    );
     return (
       <Box>
         <Section title="Phonebook">
           <Form onSubmit={this.addContact} />
         </Section>
-        <Section title="Contacts">
-          <Contacts contacts={this.state.contacts} />
-        </Section>
 
         <Filter value={this.state.filter} onChange={this.changeFilter} />
 
-        {/* <input
-          type="text"
-          value={this.state.filter}
-          onChange={this.changeFilter}
-        /> */}
+        <Section title="Contacts">
+          <Contacts contacts={filteredPhoneBook} />
+        </Section>
       </Box>
     );
   }
