@@ -4,20 +4,29 @@ import { ContactItem } from './ContactItem';
 
 const List = styled.ul`
   margin-top: 20px;
-  margin-left: 20px;
+
   font-weight: 700;
 `;
 
-export default function Contacts({ contacts }) {
+const Button = styled.button``;
+const Box = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export default function Contacts({ contacts, onDeletContact }) {
   return (
     <List>
       {contacts.map(contact => {
         return (
-          <ContactItem
-            key={contact.id}
-            name={contact.name}
-            number={contact.number}
-          />
+          <Box>
+            <ContactItem
+              key={contact.id}
+              name={contact.name}
+              number={contact.number}
+            />
+            <Button onClick={() => onDeletContact(contact.id)}>Delet</Button>
+          </Box>
         );
       })}
     </List>

@@ -69,6 +69,12 @@ class App extends React.Component {
     );
   };
 
+  deletContact = contactId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+    }));
+  };
+
   render() {
     const filteredPhoneBook = this.getVisibleContacts();
 
@@ -90,7 +96,10 @@ class App extends React.Component {
 
           <h2>Contacts</h2>
           <Filter value={this.state.filter} onChange={this.changeFilter} />
-          <ContactList contacts={filteredPhoneBook} />
+          <ContactList
+            contacts={filteredPhoneBook}
+            onDeletContact={this.deletContact}
+          />
         </Box>
       </Container>
     );
