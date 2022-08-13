@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { ContactItem } from './ContactItem';
 
 const List = styled.ul`
   margin-top: 20px;
@@ -10,13 +11,13 @@ const List = styled.ul`
 export default function Contacts({ contacts }) {
   return (
     <List>
-      {contacts.map(({ id, name, number }) => {
+      {contacts.map(contact => {
         return (
-          <li key={id}>
-            <p>
-              {name}: {number}
-            </p>
-          </li>
+          <ContactItem
+            key={contact.id}
+            name={contact.name}
+            number={contact.number}
+          />
         );
       })}
     </List>
@@ -25,6 +26,4 @@ export default function Contacts({ contacts }) {
 
 Contacts.prototype = {
   id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  number: PropTypes.number.isRequired,
 };
