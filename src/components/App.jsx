@@ -21,16 +21,39 @@ class App extends React.Component {
     filter: '',
   };
 
-  addContact = (name, number) => {
-    console.log(name, number);
+  auditContact = newContact => {
+    return this.state.contacts.some(
+      ({ name }) => name.toLowerCase() === newContact.name.toLowerCase()
+    );
+  };
 
-    const contact = {
-      id: nanoid(),
-      name: name,
-      number,
-    };
+  // addContact = (name, number) => {
+  //   console.log(name, number);
+
+  //   const contact = {
+  //     id: nanoid(),
+  //     name: name,
+  //     number,
+  //   };
+
+  //   console.log(contact.name);
+
+  //   this.setState(prevState => ({
+  //     contacts: [contact, ...prevState.contacts],
+  //   }));
+  // };
+
+  addContact = newContact => {
+    if (this.auditContact(newContact)) {
+      alert(`This name already exists`);
+      return;
+    }
+
+    const addedContact = { id: nanoid(), ...newContact };
+    console.log(newContact);
+    console.log(addedContact);
     this.setState(prevState => ({
-      contacts: [contact, ...prevState.contacts],
+      contacts: [addedContact, ...prevState.contacts],
     }));
   };
 
@@ -55,6 +78,7 @@ class App extends React.Component {
           height: '100vh',
           display: 'flex',
           justifyContent: 'center',
+          alignItems: 'center',
           fontSize: 20,
           padding: 20,
         }}
