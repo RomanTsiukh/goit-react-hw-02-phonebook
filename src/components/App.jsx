@@ -1,14 +1,21 @@
 import React from 'react';
+import styled from 'styled-components';
+import './GlobalStyle';
+import { nanoid } from 'nanoid';
+import { Box } from './Box';
+import { Section } from 'components/Section/Section';
 import ContactForm from 'components/ContactForm/ContactForm';
 import ContactList from 'components/ContactList/ContactList';
-import { GlobalStyle } from 'components/GlobaleStyle';
-import { nanoid } from 'nanoid';
-import styled from 'styled-components';
-// import Section from 'components/Section/Section';
+
 import Filter from 'components/Filter/Filter';
 
-const Container = styled.div``;
-const Box = styled.div``;
+const Title = styled.h1`
+  text-align: center;
+  font-size: ${p => p.theme.fontSizes.l};
+  font-weight: ${p => p.theme.fontWeights.bold};
+  margin-top: ${p => p.theme.space[0]}px;
+  margin-bottom: ${p => p.theme.space[0]}px;
+`;
 
 class App extends React.Component {
   state = {
@@ -21,27 +28,11 @@ class App extends React.Component {
     filter: '',
   };
 
-  auditContact = newContact => {
+  auditContact = auditNewContact => {
     return this.state.contacts.some(
-      ({ name }) => name.toLowerCase() === newContact.name.toLowerCase()
+      ({ name }) => name.toLowerCase() === auditNewContact.name.toLowerCase()
     );
   };
-
-  // addContact = (name, number) => {
-  //   console.log(name, number);
-
-  //   const contact = {
-  //     id: nanoid(),
-  //     name: name,
-  //     number,
-  //   };
-
-  //   console.log(contact.name);
-
-  //   this.setState(prevState => ({
-  //     contacts: [contact, ...prevState.contacts],
-  //   }));
-  // };
 
   addContact = newContact => {
     if (this.auditContact(newContact)) {
@@ -79,29 +70,34 @@ class App extends React.Component {
     const filteredPhoneBook = this.getVisibleContacts();
 
     return (
-      <Container
-        style={{
-          height: '100vh',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: 20,
-          padding: 20,
-        }}
+      <Box
+        m="25px"
+        bg="firstBgColor"
+        color="mainTextColor"
+        p={4}
+        pl={5}
+        pr={5}
+        width="360px"
+        fontFamily="Ubuntu"
+        fontSize={16}
+        ml="auto"
+        mr="auto"
+        border="2px solid"
+        borderRadius={16}
       >
-        <GlobalStyle />
-        <Box>
-          <h1>Phonebook</h1>
+        <Title>Phonebook</Title>
+        <Section>
           <ContactForm onSubmit={this.addContact} />
+        </Section>
 
-          <h2>Contacts</h2>
+        <Section title="Contacts">
           <Filter value={this.state.filter} onChange={this.changeFilter} />
           <ContactList
             contacts={filteredPhoneBook}
             onDeletContact={this.deletContact}
           />
-        </Box>
-      </Container>
+        </Section>
+      </Box>
     );
   }
 }
