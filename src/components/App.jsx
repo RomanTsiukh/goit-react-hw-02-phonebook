@@ -4,7 +4,7 @@ import './GlobalStyle';
 import { nanoid } from 'nanoid';
 import { Box } from './Box';
 import { Section } from 'components/Section/Section';
-import Form from './ContactForm/ContactForm';
+import ContactForm from './ContactForm/ContactForm';
 import ContactList from 'components/ContactList/ContactList';
 
 import Filter from 'components/Filter/Filter';
@@ -28,24 +28,23 @@ class App extends React.Component {
     filter: '',
   };
 
-  auditContact = auditNewContact => {
-    return this.state.contacts.some(
-      ({ name }) => name.toLowerCase() === auditNewContact.name.toLowerCase()
+  handleSubmit = e => {
+    e.preventDefault();
+    const name = e.target.name.value;
+    const number = e.target.number.value;
+    const addedContact = { id: nanoid(), name, number };
+
+    const auditContact = this.state.contacts.some(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
     );
-  };
 
-  addContact = newContact => {
-    if (this.auditContact(newContact)) {
-      alert(`This name already exists`);
-      return;
-    }
+    auditContact
+      ? alert(`Sorry, ${name} is already in your contacts`)
+      : this.setState(prevState => ({
+          contacts: [addedContact, ...prevState.contacts],
+        }));
 
-    const addedContact = { id: nanoid(), ...newContact };
-    console.log(newContact);
-    console.log(addedContact);
-    this.setState(prevState => ({
-      contacts: [addedContact, ...prevState.contacts],
-    }));
+    e.target.reset();
   };
 
   changeFilter = e => {
@@ -67,8 +66,6 @@ class App extends React.Component {
   };
 
   render() {
-    const filteredPhoneBook = this.getVisibleContacts();
-
     return (
       <Box
         m="25px"
@@ -87,13 +84,13 @@ class App extends React.Component {
       >
         <Title>Phonebook</Title>
         <Section>
-          <Form onSubmit={this.addContact} />
+          <ContactForm onSubmit={this.handleSubmit} />
         </Section>
 
         <Section title="Contacts">
           <Filter value={this.state.filter} onChange={this.changeFilter} />
           <ContactList
-            contacts={filteredPhoneBook}
+            contacts={this.getVisibleContacts()}
             onDeletContact={this.deletContact}
           />
         </Section>
