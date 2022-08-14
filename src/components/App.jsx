@@ -4,7 +4,8 @@ import './GlobalStyle';
 import { nanoid } from 'nanoid';
 import { Box } from './Box';
 import { Section } from 'components/Section/Section';
-import ContactForm from 'components/ContactForm/ContactForm';
+// import ContactForm from 'components/ContactForm/ContactForm';
+import Form from './ContactForm/ContactForm';
 import ContactList from 'components/ContactList/ContactList';
 
 import Filter from 'components/Filter/Filter';
@@ -87,7 +88,7 @@ class App extends React.Component {
       >
         <Title>Phonebook</Title>
         <Section>
-          <ContactForm onSubmit={this.addContact} />
+          <Form onSubmit={this.addContact} />
         </Section>
 
         <Section title="Contacts">
