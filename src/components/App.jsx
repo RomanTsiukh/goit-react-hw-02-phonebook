@@ -4,7 +4,6 @@ import './GlobalStyle';
 import { nanoid } from 'nanoid';
 import { Box } from './Box';
 import { Section } from 'components/Section/Section';
-// import ContactForm from 'components/ContactForm/ContactForm';
 import Form from './ContactForm/ContactForm';
 import ContactList from 'components/ContactList/ContactList';
 
