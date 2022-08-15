@@ -1,10 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-
-const Title = styled.p`
-  padding-bottom: ${p => p.theme.space[2]}px;
-`;
+import { Title } from './Filter.styled';
 
 const Filter = ({ value, onChange }) => {
   return (
